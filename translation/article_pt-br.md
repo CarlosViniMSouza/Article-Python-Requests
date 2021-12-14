@@ -290,3 +290,24 @@ print(response.json())
 ```
 
 ### Observe que, desta vez, os dados inteiros não foram alterados - apenas o campo da categoria foi atualizado.
+
+## Como fazer uma solicitação DELETE:
+
+### Como o nome sugere, se você deseja excluir um recurso da API, pode usar uma solicitação DELETE. Vamos deletar este produto com `id` 21.
+
+```Python
+import requests
+
+BASE_URL = 'https://fakestoreapi.com'
+
+response = requests.delete(f"{BASE_URL}/products/21")
+print(response.json())
+```
+
+### O método `requests.delete()` nos ajuda a fazer uma solicitação DELETE no `endpoint/products/<product_id>`.
+
+## Empacotando
+
+### Neste tutorial, aprendemos como podemos interagir com serviços da web usando uma ferramenta incrível chamada de **solicitações(requests)** em Python.
+
+### Espero que tenham gostado - e obrigado pela leitura!
