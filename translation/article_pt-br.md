@@ -46,7 +46,7 @@
 
 ### Você pode aprender mais sobre os códigos de status HTTP no [MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status).
 
-## API Endpoints
+## API Endpoints:
 
 ### **Terminais de API(API Endpoints)** são as URLs públicas expostas pelo servidor que um aplicativo cliente usa para acessar recursos e dados.
 
@@ -71,3 +71,79 @@ $ pip install requests
 ```
 
 ### Assim que a biblioteca estiver instalada, estamos prontos para prosseguir!
+
+## Como fazer uma solicitação GET:
+
+### Este é um dos métodos de solicitação HTTP mais comuns que você encontrará. É uma operação **somente leitura(read only)** que permite recuperar dados da API.
+
+### Vamos experimentar a solicitação GET no primeiro endpoint mencionado acima, que responde com uma lista de produtos.
+
+```python
+import requests
+
+BASE_URL = 'https://fakestoreapi.com'
+
+response = requests.get(f"{BASE_URL}/products")
+print(response.json())
+```
+
+### O script acima usa o método `requests.get()` para enviar uma solicitação GET no endpoint `/products` da API. Ele responde com uma lista de todos os produtos. Em seguida, chamamos `.json()` para visualizar a resposta JSON, que se parece com isto:
+
+```
+Veja o arquivo: file_api.json
+```
+
+### Se você olhar de perto, a resposta JSON parece uma lista de dicionários Python. JSON é um formato de intercâmbio de dados muito popular para APIs REST.
+
+### Você também pode imprimir outros atributos relacionados à resposta, como o código de status.
+
+```python
+print(response.status_code)
+
+# OUTPUT:
+# >>> 200
+```
+
+### Como sabemos, o código de status 200 significa uma resposta de sucesso.
+
+### Como o endpoint `/products` retorna muitos dados, vamos limitar esses dados a apenas 3 produtos.
+
+### Para fazer isso, temos um ponto final `/products?limit=x` onde x é um número inteiro positivo. O `limit` é chamado de parâmetro de consulta. Vamos ver como podemos adicionar este parâmetro de consulta na solicitação.
+
+### O método `requests.get()` usa um parâmetro chamado `params`, onde podemos especificar nossos parâmetros de consulta na forma de um dicionário Python. Assim, criamos um dicionário chamado `query_params` e passamos `limit` como chave e `3` como valor. Em seguida, passamos esse `query_params` no `request.get()`. A saída agora se parece com isto:
+
+```JSON
+[
+  {
+    "id": 1,
+    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+    "price": 109.95,
+    "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+    "category": "men's clothing",
+    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    "rating": { "rate": 3.9, "count": 120 }
+  },
+  {
+    "id": 2,
+    "title": "Mens Casual Premium Slim Fit T-Shirts ",
+    "price": 22.3,
+    "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+    "category": "men's clothing",
+    "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+    "rating": { "rate": 4.1, "count": 259 }
+  },
+  {
+    "id": 3,
+    "title": "Mens Cotton Jacket",
+    "price": 55.99,
+    "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+    "category": "men's clothing",
+    "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+    "rating": { "rate": 4.7, "count": 500 }
+  }
+]
+```
+
+### Agora temos os dados de resposta limitados a apenas 3 produtos. Vamos tentar obter apenas um produto com o `id` 18.
+
+### Como temos um endpoint `/products /<product_id>`, podemos passar o `id` 18 na URL da API e fazer uma solicitação GET nele. A resposta é parecida com esta:
