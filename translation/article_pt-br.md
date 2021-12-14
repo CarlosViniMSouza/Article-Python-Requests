@@ -167,7 +167,7 @@ print(response.status_code)
 
 ### Usamos a solicitação POST para adicionar novos dados à API REST. Os dados são enviados ao servidor no formato JSON, que se parece com um dicionário Python. De acordo com a documentação da API da Fake Store, um produto possui os seguintes atributos: `title`, `price`, `description`, `image` e `category`. Portanto, um novo produto se parece com isto:
 
-```JSON
+```Python
 new_product = {
     "title": "test product",
     "price": 13.5,
