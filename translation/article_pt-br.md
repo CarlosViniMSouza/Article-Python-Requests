@@ -269,3 +269,24 @@ print(response.json())
 ```
 
 ### Observe que o produto antigo foi completamente substituído pelo produto atualizado.
+
+## Como fazer uma solicitação PATCH:
+
+### Às vezes, não precisamos substituir os dados antigos completamente. Em vez disso, desejamos modificar apenas alguns campos. Nesse caso, usamos a solicitação PATCH.
+
+### Vamos atualizar a categoria do produto de volta de **vestuário(clothing)** para **eletrônico(electronic)**, fazendo uma solicitação PATCH no endpoint `products/<product_id>`.
+
+```Python
+import requests
+
+BASE_URL = 'https://fakestoreapi.com'
+
+updated_product = {
+    "category": 'electronic'
+}
+
+response = requests.patch(f"{BASE_URL}/products/21", json=updated_product)
+print(response.json())
+```
+
+### Observe que, desta vez, os dados inteiros não foram alterados - apenas o campo da categoria foi atualizado.
