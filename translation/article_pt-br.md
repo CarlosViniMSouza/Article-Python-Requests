@@ -243,3 +243,29 @@ print(response.json())
 ### Freqüentemente, precisamos atualizar os dados existentes na API. Usando a solicitação PUT, podemos atualizar os dados completos. Isso significa que, quando fazemos uma solicitação PUT, ela substitui os dados antigos pelos novos.
 
 ### Na solicitação POST, criamos um novo produto cujo `id` era 21. Vamos atualizar o produto antigo com um novo produto fazendo uma solicitação PUT no ponto de extremidade `products/<product_id>`.
+
+```Python
+import requests
+
+BASE_URL = 'https://fakestoreapi.com'
+
+updated_product = {
+    "title": 'updated_product',
+    "category": 'clothing'
+}
+
+response = requests.put(f"{BASE_URL}/products/21", json=updated_product)
+print(response.json())
+```
+
+### Quando fazemos a solicitação PUT com o `updated_product` usando o método `requests.put()`, ele responde com os seguintes dados JSON:
+
+```JSON
+{
+  "id": "21",
+  "title": "updated_product",
+  "category": "clothing"
+}
+```
+
+### Observe que o produto antigo foi completamente substituído pelo produto atualizado.
