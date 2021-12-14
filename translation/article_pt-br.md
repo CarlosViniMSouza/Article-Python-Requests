@@ -162,3 +162,84 @@ print(response.status_code)
   }
 }
 ```
+
+## Como fazer uma solicitação POST:
+
+### Usamos a solicitação POST para adicionar novos dados à API REST. Os dados são enviados ao servidor no formato JSON, que se parece com um dicionário Python. De acordo com a documentação da API da Fake Store, um produto possui os seguintes atributos: `title`, `price`, `description`, `image` e `category`. Portanto, um novo produto se parece com isto:
+
+```JSON
+new_product = {
+    "title": "test product",
+    "price": 13.5,
+    "description": "lorem ipsum set",
+    "image": "https://i.pravatar.cc",
+    "category": "electronic"
+}
+```
+
+### Podemos enviar uma solicitação POST usando o método `requests.post()` assim:
+
+```Python
+import requests
+
+BASE_URL = 'https://fakestoreapi.com'
+
+new_product = {
+    "title": 'test product',
+    "price": 13.5,
+    "description": 'lorem ipsum set',
+    "image": 'https://i.pravatar.cc',
+    "category": 'electronic'
+}
+
+response = requests.post(f"{BASE_URL}/products", json=new_product)
+print(response.json())
+```
+
+### No método `requests.post()`, podemos passar dados JSON usando o argumento `json`. O uso do argumento `json` define automaticamente o `Content-Type` como `Application/JSON` no cabeçalho da solicitação.
+
+### Depois de fazer uma solicitação POST no endpoint `/products`, obtemos um objeto de produto com o `id` na resposta. A resposta é parecida com esta:
+
+```JSON
+{
+  "_id": "61b45067e087f30012c45a45",
+  "id": 21,
+  "title": "test product",
+  "price": 13.5,
+  "description": "lorem ipsum set",
+  "image": "https://i.pravatar.cc",
+  "category": "electronic"
+}
+```
+
+### Se não usarmos o argumento `json`, temos que fazer a solicitação POST assim:
+
+```Python
+import requests
+import json
+
+BASE_URL = 'https://fakestoreapi.com'
+
+new_product = {
+    "title": 'test product',
+    "price": 13.5,
+    "description": 'lorem ipsum set',
+    "image": 'https://i.pravatar.cc',
+    "category": 'electronic'
+}
+
+headers = {
+    "Content-Type": "application/json"
+}
+
+response = requests.post(f"{BASE_URL}/products", data=json.dumps(new_product), headers=headers)
+print(response.json())
+```
+
+### Nesse caso, em que usamos o argumento de `data` em vez de `json`, precisamos definir o `Content-Type` como `application/json` no cabeçalho explicitamente. Enquanto no caso do argumento `json`, não precisamos serializar os dados - mas precisamos serializar os dados usando `json.dumps()` neste caso.
+
+## Como fazer uma solicitação PUT:
+
+### Freqüentemente, precisamos atualizar os dados existentes na API. Usando a solicitação PUT, podemos atualizar os dados completos. Isso significa que, quando fazemos uma solicitação PUT, ela substitui os dados antigos pelos novos.
+
+### Na solicitação POST, criamos um novo produto cujo `id` era 21. Vamos atualizar o produto antigo com um novo produto fazendo uma solicitação PUT no ponto de extremidade `products/<product_id>`.
