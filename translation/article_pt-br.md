@@ -45,3 +45,29 @@
 |    5xx	   | Erro do Servidor       |
 
 ### Você pode aprender mais sobre os códigos de status HTTP no [MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status).
+
+## API Endpoints
+
+### **Terminais de API(API Endpoints)** são as URLs públicas expostas pelo servidor que um aplicativo cliente usa para acessar recursos e dados.
+
+### Por causa deste tutorial, usaremos a API REST da Fake Store. Mais especificamente, usaremos os endpoints abaixo:
+
+| METODO HTTP |	  TERMINAIS DA API      | DESCRIÇÃO                         |
+|-------------|-------------------------|-----------------------------------|
+|    GET	    | /products	              | Obtenha uma lista de produtos.    |
+|    GET	    | /products?limit=x	      | Obtenha apenas 5 produtos.        |
+|    GET	    | /products/<product_id>	| Obtenha um único produto.         |
+|    POST	    | /products	              | Cria um novo produto.             |
+|    PUT	    | /products/<product_id>	| Atualiza um produto.              |
+|    PATCH	  | /products/<product_id>	| Atualiza parcialmente um produto. |
+|    DELETE	  | /products/<product_id>	| Deleta um produto.                |
+
+### Cada um dos terminais acima executa uma ação diferente com base no método HTTP. Para cada URL da API, o URL base é: `https://fakestoreapi.com`. Vamos explorá-los um após o outro.
+
+### Mas primeiro precisamos instalar uma biblioteca externa para consumir essas APIs. A maioria dos desenvolvedores Python usa a biblioteca `requests` para interagir com os serviços da web. Você pode instalar essa biblioteca usando o comando `pip` como este:
+
+```
+$ pip install requests
+```
+
+### Assim que a biblioteca estiver instalada, estamos prontos para prosseguir!
