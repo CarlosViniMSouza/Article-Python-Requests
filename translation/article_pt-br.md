@@ -1,5 +1,3 @@
-![LogoFCC](https://github.com/CarlosViniMSouza/Python-BackEnd-Django/blob/main/Images/freecodecamp.png)
-
 # Isso é um resumo sobre *Requisições Python – Como Interagir com Serviços Web usando Python*
 
 ## Artigo por: Ashutosh Krishna
